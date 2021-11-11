@@ -21,7 +21,7 @@ function createProduct(parent, imgUrl, textTitle, textPrice)
     title.textContent =  textTitle;
 
     const price = document.createElement('p');
-    price.textContent =  `$ ${textPrice.toFixed(2)}`;
+    price.textContent =  `€ ${textPrice.toFixed(2)}`;
 
     product.append(title, price);
     //append product
@@ -59,7 +59,7 @@ function comparePrice(a, b)
 
 function updateCart()
 {
-    cartEl.textContent = `$ ${totalCart.toFixed(2)}`;
+    cartEl.textContent = `€ ${totalCart.toFixed(2)}`;
 }
 
 
