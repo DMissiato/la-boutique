@@ -21,7 +21,7 @@ function createProduct(parent, imgUrl, textTitle, textPrice)
     title.textContent =  textTitle;
 
     const price = document.createElement('p');
-    price.textContent =  `$ ${textPrice.toFixed(2)}`;
+    price.textContent =  `€ ${textPrice.toFixed(2)}`;
 
     product.append(title, price);
     //append product
@@ -59,7 +59,23 @@ function comparePrice(a, b)
 
 function updateCart()
 {
-    cartEl.textContent = `$ ${totalCart.toFixed(2)}`;
+    let total = localStorage.getItem('totalCart');
+    if(total == undefined || total == null)
+    {
+
+        localStorage.setItem('totalCart', 0);
+        console.log(localStorage.getItem('totalCart'));
+        return;
+    }
+    total = parseFloat(localStorage.getItem('totalCart'));
+    cartEl.textContent = `€ ${total.toFixed(2)}`;
+}
+
+function addToCart(price)
+{
+    let total = parseFloat(localStorage.getItem('totalCart'));
+    total += parseFloat(price);
+    localStorage.setItem('totalCart', total);
 }
 
 
@@ -68,7 +84,6 @@ const cartEl = document.querySelector('.cart');
 const orderEl = document.querySelector('#order');
 
 let products = [];
-let totalCart = 0;
 
 // Fetch API
 fetch('https://fakestoreapi.com/products')
@@ -77,6 +92,7 @@ fetch('https://fakestoreapi.com/products')
         products = data;
         
         renderProducts(wrapperProducts);
+        updateCart();
     });
 
 
@@ -103,11 +119,11 @@ wrapperProducts.addEventListener('click', (e) => {
 
     if(e.target.className == 'product')
     {
-        totalCart += parseFloat(e.target.attributes.value.value);
+        addToCart(e.target.attributes.value.value);
     }
     else if (e.target.parentNode.className == 'product')
     {
-        totalCart += parseFloat(e.target.parentNode.attributes.value.value);
+        addToCart(e.target.parentNode.attributes.value.value);
     }
 
     updateCart();
