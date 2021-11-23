@@ -1,6 +1,15 @@
 
-// Manual import of products
-//import { products } from "./product.js";
+// Async Await
+// Fetch API
+const getProducts = async() => {
+    const res = await fetch('https://fakestoreapi.com/products')
+    const data = await res.json();
+
+    products = data;
+    
+    renderProducts(wrapperProducts);
+    updateCart();
+};
 
 // Creare and append one product
 function createProduct(parent, imgUrl, textTitle, textPrice)
@@ -64,7 +73,6 @@ function updateCart()
     {
 
         localStorage.setItem('totalCart', 0);
-        console.log(localStorage.getItem('totalCart'));
         return;
     }
     total = parseFloat(localStorage.getItem('totalCart'));
@@ -85,16 +93,7 @@ const orderEl = document.querySelector('#order');
 
 let products = [];
 
-// Fetch API
-fetch('https://fakestoreapi.com/products')
-    .then((response) => response.json())
-    .then((data) => {
-        products = data;
-        
-        renderProducts(wrapperProducts);
-        updateCart();
-    });
-
+getProducts();
 
 // Order by name or price
 orderEl.addEventListener('change', () => {
@@ -102,7 +101,6 @@ orderEl.addEventListener('change', () => {
     {
         case "name":
             products = products.sort(compareName);
-            console.log("name");
             break;
         case "price":
             products = products.sort(comparePrice);
@@ -115,6 +113,7 @@ orderEl.addEventListener('change', () => {
     renderProducts(wrapperProducts);
 });
 
+// Add product to cart on click
 wrapperProducts.addEventListener('click', (e) => {
 
     if(e.target.className == 'product')
@@ -128,3 +127,4 @@ wrapperProducts.addEventListener('click', (e) => {
 
     updateCart();
 });
+
