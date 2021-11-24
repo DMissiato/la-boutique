@@ -48,13 +48,13 @@ header .cart
     background-color: #000;
     font-weight: 700;
     border-radius: 2em;
+    cursor: pointer;
 }
 
 .hero
 {
     background-color: rgb(237 232 216);
     position: relative;
-    margin-bottom: 80px;
 }
 
 .hero img
@@ -82,7 +82,8 @@ header .cart
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    background-color: #fafafa;
+    padding-top: 80px;
 }
 
 h3.wrapper__title
@@ -108,7 +109,8 @@ h3.wrapper__title
     min-height: 400px;
     margin: 20px 50px;
     display: flex;
-    overflow-y: hidden;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .product
@@ -119,10 +121,10 @@ h3.wrapper__title
     align-items: flex-start;
     margin: 7.5px;
 
-    min-width: 200px;
+    width: 150px;
 
     box-shadow: 2px 2px 5px #000;
-    background-color: rgb(246, 246, 246);
+    background-color: #fff;
     padding: 10px;
 
     opacity: 0.85;
