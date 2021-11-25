@@ -51,24 +51,73 @@ header .cart
     cursor: pointer;
 }
 
+.modalCart
+{
+    z-index: 1;
+    position: fixed;
+    top: 110px;
+    right: 10px;
+    background-color: #fff;
+    padding: 10px 15px;
+    font-size: 12px;
+    text-align: right;
+    border: 1px solid #ddd;
+    opacity: 1;
+
+    animation-name: modalCartAnim;
+    animation-duration: 4s;
+}
+
+@keyframes modalCartAnim
+{
+    from{
+        top: calc(100vh + 110px);
+    }
+    10%{
+        top: 110px;
+    }
+    40%{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
 .hero
 {
-    background-color: rgb(237 232 216);
     position: relative;
 }
 
-.hero img
+.hero .slider
 {
-    width: 80vw;
-    display: block;
+    width: 100vw;
+    height: 55vw;
+    overflow: hidden;
+    margin-top: -50px;
+}
+
+.hero .slider img
+{
+    width: 100vw;
+    height: 0;
+    opacity: 0;
     margin: auto;
+    transition: opacity 3s ease;
+}
+
+.hero .slider img.selected
+{
+    height: auto;
+    opacity: 1;
+    transition: opacity 1s ease;
 }
 
 .hero h2
 {
     width: 60vw;
     position: absolute;
-    top: 25vw;
+    top: 23vw;
     left: 20vw;
 
     color: #fff;
